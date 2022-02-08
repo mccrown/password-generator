@@ -5,18 +5,19 @@ const numbers = "1234567890";
 const special = "!@#$%^&*?";
 
 //function for choosing random chars from string variables
-function randomChar (String) {
+function randomChar(String) {
   return String[Math.floor(Math.random() * String.length)]
 };
 
 function generatePassword() {
-  let emptyArray = [];
+  let emptyString = '';
   let passwordLength = window.prompt("What is your desired password length? Please enter a number between 8 and 128.");
   passwordLength = parseInt(passwordLength);
+
   //if length is an invalid length, prompt for password length again
-  if (passwordLength < 8 || passwordLength > 128){
-  window.alert("That is not a valid number. Please enter a number between 8-128.");
-  generatePassword();
+  if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
+    window.alert("That is not a valid number. Please enter a number between 8-128.");
+    generatePassword();
   };
 
   let charChoice = {
@@ -26,12 +27,33 @@ function generatePassword() {
     specials: window.confirm("Confirm to add special characters to your password."),
   };
 
-  if (!charChoice.capitals && !charChoice.lowers && !charChoice.incNumbers && !charChoice.specials){
-    window.prompt("You must choose at least one option, try again.");
+  if (!charChoice.capitals && !charChoice.lowers && !charChoice.incNumbers && !charChoice.specials) {
+    window.alert("You must choose at least one option, try again.");
     return generatePassword();
-  }
+  };
 
+  for (i=0; i < (passwordLength); i++) {
+    if (charChoice.capitals && emptyString.length < passwordLength) {
+      let tempVar = randomChar(capital);
+      emptyString += tempVar;
+    }
+    if (charChoice.lowers && emptyString.length < passwordLength) {
+      let tempVar = randomChar(lower);
+      emptyString += tempVar;
+    }
+    if (charChoice.incNumbers && emptyString.length < passwordLength) {
+      let tempVar = randomChar(numbers);
+      emptyString += tempVar;
+    }
+    if (charChoice.specials && emptyString.length < passwordLength) {
+      let tempVar = randomChar(special);
+      emptyString += tempVar;
+    }
+    emptyString = emptyString.split('').sort(function(){return 0.5-Math.random()}).join('');
+  };
+return emptyString;
 };
+
 
 
 
