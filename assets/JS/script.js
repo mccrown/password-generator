@@ -19,19 +19,19 @@ function generatePassword() {
     window.alert("That is not a valid number. Please enter a number between 8-128.");
     generatePassword();
   };
-
+// confirm what const to use in the password
   let charChoice = {
     capitals: window.confirm("Confirm to add capital letters to your password."),
     lowers: window.confirm("Confirm to add lower case letters to your password."),
     incNumbers: window.confirm("Confirm to add numbers to your password."),
     specials: window.confirm("Confirm to add special characters to your password."),
   };
-
+// alert user to select at least one option for password if none are selected
   if (!charChoice.capitals && !charChoice.lowers && !charChoice.incNumbers && !charChoice.specials) {
     window.alert("You must choose at least one option, try again.");
     return generatePassword();
   };
-
+// loop to add const variables until length of password is satisfied
   for (i=0; i < (passwordLength); i++) {
     if (charChoice.capitals && emptyString.length < passwordLength) {
       let tempVar = randomChar(capital);
@@ -49,6 +49,7 @@ function generatePassword() {
       let tempVar = randomChar(special);
       emptyString += tempVar;
     }
+    //randomize const variables in string
     emptyString = emptyString.split('').sort(function(){return 0.5-Math.random()}).join('');
   };
 return emptyString;
