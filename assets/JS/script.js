@@ -8,7 +8,7 @@ const special = "!@#$%^&*?";
 function randomChar(String) {
   return String[Math.floor(Math.random() * String.length)]
 };
-
+// user enters how long password should be
 function generatePassword() {
   let emptyString = '';
   let passwordLength = window.prompt("What is your desired password length? Please enter a number between 8 and 128.");
